@@ -12,6 +12,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
+//connect to database
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGO);
@@ -32,16 +33,26 @@ mongoose.connection.on("connected", ()=>{
 
 //add route entry point
 
-app.get('/api/v1/', (req,res) => {
-  res.send("Hello world")
-})
+// app.get('/api/v1/', (req,res) => {
+//   res.send("Hello world")
+// })
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", usersRoute)
 app.use("/api/v1/hotels", hotelsRoute)
 app.use("/api/v1/rooms", roomsRoute)
 
-
+//Error handler
+app.use((error, req, res, next) => {
+  const errorStatus = error.status || 500;
+  const errorMessage = error.message || "Sorry, something went wrong";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: error.stack
+  })
+})
 
 
 app.listen(5000, () =>{
