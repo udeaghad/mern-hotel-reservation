@@ -12,7 +12,7 @@ const RoomSchema = new Schema({
     required: true
   },
   maxPeople: {
-    type: String,
+    type: Number,
     required: true
   },
   
