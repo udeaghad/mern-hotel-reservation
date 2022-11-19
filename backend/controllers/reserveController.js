@@ -1,7 +1,11 @@
 import Reservation from "../models/Reservation.js";
 
 export const createReservation = async(req, res, next) => {
-  const newReservation = new Reservation(req.body);
+  // const newReservation = new Reservation(req.body);
+  const newReservation = new Reservation({
+    ...req.body,
+    user: req.user.id,
+  });
 
   try {
     const savedReservation = await newReservation.save();
