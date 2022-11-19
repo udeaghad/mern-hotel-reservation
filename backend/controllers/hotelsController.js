@@ -39,13 +39,19 @@ export const getHotel = async(req, res, next) => {
 }
 
 export const getAllHotels = async(req, res, next) => {
-  // const failed = true;
+  let filter = req.query
+  let query
 
-  // if (failed){
-  //   return next(createError(401, "You are not authorized to access this page"))
-  // }
+  if(filter){
+    if("name" in filter){
+      query = { $text: { $search: filter.name } }
+    }else if("city" in filter){
+      query = { "city": { $eq: filter.city }  }
+    }
+  }
+  
   try {
-    const allhotels = await Hotel.find();
+    const allhotels = await Hotel.find(query);
     res.status(200).json(allhotels)
   } catch (error) {
     next(error)
