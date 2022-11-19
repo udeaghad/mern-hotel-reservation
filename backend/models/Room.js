@@ -21,10 +21,10 @@ const RoomSchema = new Schema({
     required: true
   },
 
-  roomNumber: [{
-    number: Number,
-    unavailableDates: {type: [Date]}
-  }],
+  photos: {
+    type: String,
+    required: true
+  }    
 },
 {timestamps: true}
 

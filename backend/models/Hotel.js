@@ -41,11 +41,6 @@ const HotelSchema = new Schema({
   desc: {
     type: String,
    },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  }
   
 });
 

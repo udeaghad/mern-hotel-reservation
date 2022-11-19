@@ -6,6 +6,7 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
+import reservationsRoute from "./routes/reservation.js"
 import cookieParser from 'cookie-parser'
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGO);
+    console.log("Connected to MongoDB");
    
   } catch (error) {
     console.error(error.message)
@@ -45,6 +47,7 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", usersRoute)
 app.use("/api/v1/hotels", hotelsRoute)
 app.use("/api/v1/rooms", roomsRoute)
+app.use("/api/v1/reservations", reservationsRoute)
 
 //Error handler
 app.use((error, req, res, next) => {

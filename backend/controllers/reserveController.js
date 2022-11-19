@@ -32,3 +32,14 @@ export const deleteReservation = async(req, res, next) => {
     next(error);
   }
 }
+
+export const getAllReservations = async(req, res, next) => {
+ 
+  try {
+    const allReservations = await Reservation.find({user: req.params.user_id}).populate("hotel").populate("room");
+
+    res.status(200).json(allReservations)
+  } catch (error) {
+    next(error)
+  }
+}
