@@ -43,7 +43,7 @@ app.use(cookieParser())
 //   res.send("Hello world")
 // })
 
-app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/auths", authRoute);
 app.use("/api/v1/users", usersRoute)
 app.use("/api/v1/hotels", hotelsRoute)
 app.use("/api/v1/rooms", roomsRoute)

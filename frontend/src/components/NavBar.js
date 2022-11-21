@@ -3,9 +3,28 @@ import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import {useSelector, useDispatch} from "react-redux";
+import getUser from "../redux/auths/usersAction";
+import axios from "axios";
 
 
 const NavBar = () => {
+
+  
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
+  const handleSignOut = async() => {
+    localStorage.removeItem("user");    
+
+     dispatch(getUser(null))
+     try {
+       await axios.post("http://localhost:5000/api/v1/auths/logout", { withCredentials: true } )
+       
+     } catch (error) {
+        console.error(error.message)
+     }
+  }
   
   return (
     <Navbar bg="primary" expand="lg" variant="dark">
@@ -16,8 +35,16 @@ const NavBar = () => {
           <Nav className="me-auto">
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/" >Home</NavLink>
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/reservations">Reservations</NavLink>
+            {!user ?
+            <>            
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/SignUp">Sign Up</NavLink>
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/SignIn">Sign In</NavLink>
+            </>
+            :
+            <>
+            <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/" onClick={handleSignOut}>Sign Out</NavLink>
+            </>
+            } 
           </Nav>
         </Navbar.Collapse>
       </Container>
