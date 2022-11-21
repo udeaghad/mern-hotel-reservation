@@ -4,7 +4,8 @@ const hotelsReducer = (state = hotel, action) => {
     switch(action.type) {
         case "GET_HOTEL/fulfilled":
             return action.payload;
-        
+        case "DELETE_ROOM":
+            return {...state, rooms: [...state.rooms.filter(room => room._id !== action.payload)]}
         default:
             return state
     }

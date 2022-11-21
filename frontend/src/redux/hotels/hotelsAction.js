@@ -4,6 +4,7 @@ import axios from "axios"
 const GET_HOTEL = "GET_HOTEL"
 const GET_ALL_HOTELS = "GET_ALL_HOTELS"
 const DELETE_HOTEL = "DELETE_HOTEL"
+const DELETE_ROOM = "DELETE_ROOM"
 
 const getHotels = createAsyncThunk(
   GET_HOTEL, 
@@ -29,5 +30,10 @@ const deleteHotelAction = (payload) => ({
   payload
 })
 
+const deleteRoomAction = (payload) => ({
+  type: DELETE_ROOM,
+  payload
+})
 
-export  {getHotels, getAllHotels, deleteHotelAction};
+
+export  {getHotels, getAllHotels, deleteHotelAction, deleteRoomAction};

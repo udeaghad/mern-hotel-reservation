@@ -48,7 +48,7 @@ const CreateRoom = () => {
   }
 
   const allHotels = useSelector(state => state.allHotels)
-  console.log(allHotels)
+  
   return (
     <>
     <h1>Create Room</h1>

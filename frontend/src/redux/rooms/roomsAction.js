@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const GET_ROOM = "GET_ROOM";
 
+
 const getRoom = createAsyncThunk(
   GET_ROOM, 
   async (room_id) => { 
@@ -10,5 +11,7 @@ const getRoom = createAsyncThunk(
     console.log(data);
     return data;
   });
+
+  
 
 export default getRoom;

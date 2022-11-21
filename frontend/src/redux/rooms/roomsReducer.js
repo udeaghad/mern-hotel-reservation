@@ -1,9 +1,10 @@
-const room = {}
+const initialRoom = {}
 
-const roomsReducer = (state = room, action) => {
+
+const roomsReducer = (state = initialRoom, action) => {
     switch(action.type) {
         case "GET_ROOM/fulfilled":
-            return action.payload
+            return action.payload        
         default:
             return state
     }

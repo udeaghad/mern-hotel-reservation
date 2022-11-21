@@ -11,6 +11,7 @@ import ReservationPage from './components/ReservationPage.js';
 import CreateHotel from './components/CreateHotelPage.js';
 import CreateRoom from './components/CreateRoomPage.js';
 
+
 const App = ()=> {
   return (
     <div className="App">
@@ -23,7 +24,7 @@ const App = ()=> {
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/reservations' element={<ReservationPage />} />
         <Route path='/createhotel' element={<CreateHotel />} />
-        <Route path='/createroom' element={<CreateRoom />} />
+        <Route path='/createroom' element={<CreateRoom />} />        
       </Routes>
      
     </div>

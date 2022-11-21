@@ -31,10 +31,7 @@ const HomePage = () => {
     navigate("/createroom")
   }
 
-  const handleEdit = () => {
-    navigate("/edit/hotel")
-  }
-
+  
   const handleDelete = async(e) => {
       e.preventDefault()
       try {
@@ -63,8 +60,7 @@ const HomePage = () => {
           <p>Facilities: {hotel.desc}</p>
           <p>City: {hotel.city}</p>
           <img src={hotel.photos} alt={hotel.name} />
-          <button id={hotel._id} onClick={handleClick}>View and Book</button>
-          <button id={hotel._id} onClick={handleEdit}>Edit</button>
+          <button id={hotel._id} onClick={handleClick}>View and Book</button>          
           <button id={hotel._id} onClick={handleDelete}>Delete</button>          
           </div>
       ))}
