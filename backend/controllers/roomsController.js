@@ -16,7 +16,7 @@ export const createRoom = async(req, res, next) => {
       }catch(error){
         next(error)
       }
-   res.status(200).json(savedRoom)
+   res.status(200).json({room: savedRoom, message: "Room has been created successfully"})
   } catch (error) {
     next(error)
   }

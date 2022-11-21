@@ -20,7 +20,7 @@ const HotelSchema = new Schema({
   },
 
   rooms: {
-    type: [String]
+    type: [{type:Schema.Types.ObjectId , ref: "Room", required: true}],
   },
 
   rating: {
