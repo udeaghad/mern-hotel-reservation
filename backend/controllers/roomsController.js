@@ -11,7 +11,7 @@ export const createRoom = async(req, res, next) => {
 //Update room field in hotel model
       try {
         await Hotel.findByIdAndUpdate(hotelId, {
-          $push: {rooms: savedRoom._id}
+          $push: {rooms: savedRoom}
         })
       }catch(error){
         next(error)
