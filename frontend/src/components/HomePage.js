@@ -54,16 +54,24 @@ const HomePage = () => {
       <button type="button" onClick={createNewRoom}>Create New Room</button>
       {msg && <p>{msg}</p>}
       <h1>Hotels</h1>
-      {hotels.map((hotel) => (
+      {hotels.map((hotel) => {
+        
+        const base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data))
+        return ( 
         <div key={hotel._id}>
           <h1>{hotel.name}</h1>
           <p>Facilities: {hotel.desc}</p>
-          <p>City: {hotel.city}</p>
-          <img src={hotel.photos} alt={hotel.name} />
+          <p>City: {hotel.city}</p> 
+          
+          
+         <img src={`data:images/jpeg;base64,${base64String}`} alt={`${hotel.name}`} />
+          
+          
+      
           <button id={hotel._id} onClick={handleClick}>View and Book</button>          
           <button id={hotel._id} onClick={handleDelete}>Delete</button>          
           </div>
-      ))}
+)})}
     </div>
   )
 }

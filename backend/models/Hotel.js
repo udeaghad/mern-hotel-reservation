@@ -12,7 +12,8 @@ const HotelSchema = new Schema({
     required: true
   },
   photos: {
-    type: String
+    image: { data: Buffer, contentType: String },
+    
   },
   
   cheapest_price: {

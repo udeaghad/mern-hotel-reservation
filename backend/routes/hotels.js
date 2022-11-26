@@ -3,11 +3,25 @@ import { createHotel, deleteHotel, getAllHotels, getHotel, updatedHotel } from "
 import { verifyAdmin } from "../utils/verifyToken.js";
 // import Hotel from "../models/Hotel.js";
 import { createError } from "../utils/error.js";
-
+import multer from "multer"
 const router = express.Router();
 
+//Handle image upload to mongoDB
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images/")
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({storage: storage})
+
+
 //CREATE
-router.post("/", verifyAdmin, createHotel)
+router.post("/", verifyAdmin, upload.single("photos"), createHotel)
 //UPDATE
 router.put("/:id", verifyAdmin, updatedHotel)
 //DELETE

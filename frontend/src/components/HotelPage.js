@@ -9,6 +9,7 @@ const HotelPage = () => {
   const [msg, setMsg] = useState("");
   const hotel = useSelector(state => state.hotel)
  console.log(hotel)
+ const base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data))
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -41,6 +42,7 @@ const HotelPage = () => {
       <p>{hotel.city}</p>
       <p>{hotel.cheapest_price}</p>
       <p>{hotel.rating}</p>
+      <img src={`data:image/jpeg;base64,${base64String}`} alt="hotel" />
       <div>
         {hotel.rooms && hotel.rooms.map((room) => (
           <div key={room._id}>

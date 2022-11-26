@@ -12,11 +12,17 @@ const CreateHotel = () => {
     cheapest_price: ""
   })
 
-  const [file, setFile] = useState();
+  const [file, setFile] = useState({
+    preview: "",
+    photos: ""
+  });
 
   const handlePhotos = (e) => {
     console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    setFile({
+      preview: URL.createObjectURL(e.target.files[0]),
+      photos: e.target.files[0]
+    });
 }
 
   const [msg, setMsg] = useState("")
@@ -30,11 +36,24 @@ const CreateHotel = () => {
   }
 
   const onSubmit = async(e) => {
-
-    const newBody = {...body, photos: file}
     e.preventDefault()
+    console.log(body)
+    console.log(file.photos)
+    const formData = new FormData()
+    
+    formData.append("name", body.name)
+    formData.append("desc", body.desc)
+    formData.append("address", body.address)
+    formData.append("city", body.city)
+    formData.append("cheapest_price", body.cheapest_price)
+    formData.append("photos", file.photos)
+    // formData.append("file", file.photos.name)  
+    
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/hotels", newBody, { withCredentials: true } )
+      const res = await axios.post("http://localhost:5000/api/v1/hotels", formData, { withCredentials: true },
+      {
+        headers: { "Content-Type": "multipart/form-data" }
+      } )
       const data = await res.data
       console.log(data)  
        setMsg(data.message)
@@ -49,6 +68,7 @@ const CreateHotel = () => {
     <>
     <h1>Create Hotel</h1>
     {msg && <p>{msg}</p>}
+    {file.preview && <img src={ file.preview } alt="preview" />}
     <form onSubmit={onSubmit}>
       <input type="text"  name="name" placeholder="Enter Hotel Name" onChange={handleChange}/>
       <input type="text" placeholder="Enter Hotel Address" name="address" onChange={handleChange}/>

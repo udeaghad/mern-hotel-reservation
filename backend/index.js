@@ -7,7 +7,8 @@ import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import reservationsRoute from "./routes/reservation.js"
-import cookieParser from 'cookie-parser'
+import cookieParser from 'cookie-parser';
+// import multer from 'multer';
 
 const app = express();
 dotenv.config();
@@ -42,6 +43,7 @@ app.use(cookieParser())
 // app.get('/api/v1/', (req,res) => {
 //   res.send("Hello world")
 // })
+
 
 app.use("/api/v1/auths", authRoute);
 app.use("/api/v1/users", usersRoute)

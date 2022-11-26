@@ -1,8 +1,21 @@
 import Hotel from "../models/Hotel.js";
+import fs from "fs";
 // import { createError } from "../utils/createError.js";
 
 export const createHotel = async(req, res, next) => {
-  const newHotel = new Hotel(req.body)
+ 
+  console.log(req.body)
+  console.log(req.file)
+  
+  const newHotel = new Hotel({
+    ...req.body,
+    photos: { 
+      image: {
+        data: fs.readFileSync(`images/${req.file.filename}`),
+        contentType: `images/${req.file.mimetype.split("/")[1]}` 
+      }
+    }
+  })
   try {
     const savedHotel = await newHotel.save();
     res.status(200).json({hotel: savedHotel,message: "Hotel has been created successfully"})
