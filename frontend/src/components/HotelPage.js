@@ -8,8 +8,14 @@ import { deleteRoomAction } from "../redux/hotels/hotelsAction";
 const HotelPage = () => {
   const [msg, setMsg] = useState("");
   const hotel = useSelector(state => state.hotel)
- console.log(hotel)
- const base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data))
+  
+  let base64String = ""
+  if(hotel){
+    base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data))
+  
+  }
+  // const base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data))
+ 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -36,25 +42,32 @@ const HotelPage = () => {
   return (
     <>
      {msg && <p>{msg}</p>}
+     {hotel && <div> 
       <h1>{hotel.name}</h1>
       <p>{hotel.address}</p>
       <p>{hotel.desc}</p>
       <p>{hotel.city}</p>
       <p>{hotel.cheapest_price}</p>
       <p>{hotel.rating}</p>
-      <img src={`data:image/jpeg;base64,${base64String}`} alt="hotel" />
+      <img src={`data:image/png;base64,${base64String}`} alt={hotel.name} />
+      
+      <h2>Rooms</h2>
       <div>
-        {hotel.rooms && hotel.rooms.map((room) => (
+        {hotel.rooms && hotel.rooms.map((room) => { 
+          const room64String = btoa(String.fromCharCode(...room.photos.data.data))
+          return( 
           <div key={room._id}>
             <p>{room.title}</p>
-            <img src={room.photos} alt={room.name} />
+            
             <p>{room.price}</p>
             <button id={room._id} onClick={handleClick}>Book</button>
             <button id={room._id} onClick={handleDelete}>Delete Room</button>
-            </div>
-            ))}
+            <img src={`data:images/png;base64,${room64String}`} alt={room.name} />
+            </div>)
+})}
       </div>
-      
+     </div>
+     } 
     </>
   )
 }

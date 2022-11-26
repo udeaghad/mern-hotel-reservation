@@ -1,4 +1,4 @@
-const hotel = {}
+const hotel = null
 
 const hotelsReducer = (state = hotel, action) => {
     switch(action.type) {

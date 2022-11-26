@@ -1,4 +1,4 @@
-const initialRoom = {}
+const initialRoom = null
 
 
 const roomsReducer = (state = initialRoom, action) => {

@@ -3,10 +3,7 @@ import fs from "fs";
 // import { createError } from "../utils/createError.js";
 
 export const createHotel = async(req, res, next) => {
- 
-  console.log(req.body)
-  console.log(req.file)
-  
+   
   const newHotel = new Hotel({
     ...req.body,
     photos: { 

@@ -1,7 +1,8 @@
 import { configureStore, combineReducers} from '@reduxjs/toolkit';
-import {hotelsReducer, allHotelsReducer} from "./hotels/hotelsReducer.js"
-import roomsReducer from "./rooms/roomsReducer.js";
-import usersReducer from './auths/usersReducer.js';
+import {hotelsReducer, allHotelsReducer} from "./hotels/hotelsReducer"
+import roomsReducer from "./rooms/roomsReducer";
+import usersReducer from './auths/usersReducer';
+
 
 
 const rootReducer = combineReducers({
@@ -9,7 +10,7 @@ const rootReducer = combineReducers({
     hotel: hotelsReducer,
     room: roomsReducer,
     user: usersReducer, 
-    allHotels: allHotelsReducer   
+    allHotels: allHotelsReducer 
 })
 
 const store = configureStore({

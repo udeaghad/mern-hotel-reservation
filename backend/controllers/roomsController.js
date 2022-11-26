@@ -1,10 +1,18 @@
 import Room from "../models/Room.js";
 import Hotel from "../models/Hotel.js";
+import fs from "fs"
 // import { createError } from "../utils/createError.js";
 
 export const createRoom = async(req, res, next) => {
+  
   const hotelId = req.params.hotelId;
-  const newRoom = new Room(req.body)
+  const newRoom = new Room({
+    ...req.body,
+    photos: {
+       data: fs.readFileSync(`images/${req.file.filename}`),
+       contentType: `images/${req.file.mimetype.split("/")[1]}`
+    }
+  })
 
   try {
       const savedRoom = await newRoom.save();  

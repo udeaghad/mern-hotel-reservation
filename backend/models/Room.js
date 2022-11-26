@@ -22,8 +22,8 @@ const RoomSchema = new Schema({
   },
 
   photos: {
-    type: String,
-    required: true
+    data: Buffer,
+    contentType: String
   }    
 },
 {timestamps: true}

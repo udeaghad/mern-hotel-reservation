@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 const BookHotel = () => {  
 
   const room = useSelector(state => state.room)
-  console.log(room)
+  let base64String = ""
+  if(room){
+    base64String = btoa(String.fromCharCode(...room.photos.data.data))
+  }
 
   const [bookDate, setBookDate] = useState()
 
@@ -43,18 +46,20 @@ const BookHotel = () => {
 
   return ( 
     <> 
+    { room && <div> 
   <h1>Book hotel</h1>
+
   <p>{room.title}</p>
   <p>{room.price}</p>
   <p>{room.desc}</p>
-  <img src={room.photos} alt={room.name} />
+  <img src={`data:image/png;base64,${base64String}`} alt={room.title} />
   <p>{room.maxPeople}</p>
 
   <form onSubmit={onSubmit}>
     <input type="date" name="date" placeholder="Choose date" onChange={(e) => setBookDate(e.target.value)}/>
     <button type="submit">Book</button>
   </form>
-
+  </div>}
    </>
   )
 }
