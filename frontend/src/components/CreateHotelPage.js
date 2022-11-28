@@ -1,8 +1,10 @@
 import React, {useState} from "react";
-import axios from "axios"
+import axios from "axios";
+import {useNavigate} from "react-router-dom"
 
 
 const CreateHotel = () => {
+  const navigate = useNavigate()
 
   const [body, setBody] = useState({
     name: "",
@@ -61,22 +63,66 @@ const CreateHotel = () => {
       console.error(error.message)    
       
     }  
+
+    e.target.reset()
     
+  }
+
+  const handleCancel =() =>{
+     navigate("/")
   }
 
   return (
     <>
     <h1>Create Hotel</h1>
     {msg && <p>{msg}</p>}
-    {file.preview && <img src={ file.preview } alt="preview" />}
-    <form onSubmit={onSubmit}>
-      <input type="text"  name="name" placeholder="Enter Hotel Name" onChange={handleChange}/>
-      <input type="text" placeholder="Enter Hotel Address" name="address" onChange={handleChange}/>
-      <input type="text" placeholder="Enter city" name="city"  onChange={handleChange}/>
-      <input type="file" placeholder="Upload ohotos" name="photos" onChange={handlePhotos} />      
-      <input type="number" placeholder="Enter cheapest price" name="cheapest_price"  onChange={handleChange}/>
-      <input type="text-area" placeholder="Describe available facilities" name="desc"  onChange={handleChange}/>
-      <button type="submit">Create new hotel</button>
+
+    
+    <form onSubmit={onSubmit} className="hotel_form">
+      <div className="form-group">
+        <label htmlFor="name" className="name_label">Name of Hotel
+          <input type="text"  name="name" placeholder="Enter Hotel Name" onChange={handleChange} className="name_input form-control"/>
+        </label>
+      </div>
+      
+      <div className="form-group">
+         <label htmlFor="desc" className="name_label">Address
+           <input type="text" placeholder="Enter Hotel Address" name="address" onChange={handleChange} className="form-control"/>
+         </label>
+      </div>
+
+      <div className="form-group">      
+        <label htmlFor="city" className="name_label">City
+           <input type="text" placeholder="Enter city" name="city"  onChange={handleChange} className="form-control"/>
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="cheapest_price" className="name_label" >Cheapest Price
+          <input type="number" placeholder="Enter cheapest price" name="cheapest_price"  onChange={handleChange} className="form-control"/>
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="desc" className="name_label">Facilities available
+           <textarea type="text-area" placeholder="Describe available facilities" name="desc"  onChange={handleChange} className="form-control"/>
+        </label>
+      </div>
+
+      {file.preview && <div className="preview_img"><img src={ file.preview } alt="preview" style={{width: "100%"}}/></div>}
+
+      <div className="form-group">
+        <label htmlFor="photos" className="name_label">Upload photos
+          <input type="file" placeholder="Upload ohotos" name="photos" onChange={handlePhotos} className="form-control-file" />      
+        </label>
+      </div>
+
+      <div className="btn_container">
+        <button className="create_button"type="submit">Create new hotel</button>
+        <button type="button" onClick={handleCancel} className="btn btn-danger"> Cancel</button>
+      </div>
+      
+      
     </form>
 
     </>

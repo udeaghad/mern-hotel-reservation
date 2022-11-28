@@ -46,13 +46,13 @@ const HomePage = () => {
       }     
       
   }
-
+//setup drag width carousel
   const [width, setWidth] = useState(0)
 
   const carousel = useRef()
 
-  useEffect(() => {
-    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 500)
+  useEffect(() => {    
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 450)
   }, [])
 
   
