@@ -24,12 +24,8 @@ const ReservationPage = () => {
   
   const handleDelete = (e) => {
     e.preventDefault()
-    console.log(e.target.id)
-    
+   
      axios.delete(`http://localhost:5000/api/v1/reservations/${e.target.id}`, { withCredentials: true })
-     
-     
-     
       setReservations(reservations.filter(reservation => reservation._id !== e.target.id))
     
   } 
@@ -38,8 +34,7 @@ const ReservationPage = () => {
   return(
     <>
     <h1>Reservation Page</h1>
-   
-    {reservations.map((reservation) => { 
+       {reservations.map((reservation) => { 
       console.log(reservation)
       const room64String = btoa(String.fromCharCode(...reservation.room.photos.data.data))
       const hotel64String = btoa(String.fromCharCode(...reservation.hotel.photos.image.data.data))

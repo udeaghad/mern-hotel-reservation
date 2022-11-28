@@ -28,11 +28,11 @@ const connect = async () => {
 
 //Check connection to MongoDB
 mongoose.connection.on("disconnected", ()=>{
-  console.log("Disconnected from mondoDB")
+  console.log("Disconnected from mongoDB")
 })
 
 mongoose.connection.on("connected", ()=>{
-  console.log("mondoDB connected")
+  console.log("mongoDB connected")
 })
 
 //cookie parser

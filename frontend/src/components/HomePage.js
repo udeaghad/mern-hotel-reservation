@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {getHotels, getAllHotels, deleteHotelAction} from "../redux/hotels/hotelsAction"
+import {getHotels, getAllHotels, deleteHotelAction} from "../redux/hotels/hotelsAction";
+import {motion} from "framer-motion";
 
 const HomePage = () => {
   // const [hotels, setHotels] = useState([]);
@@ -14,7 +15,7 @@ const HomePage = () => {
   
   useEffect(() => {
     dispatch(getAllHotels())
-  }, [dispatch])
+  }, [])
 
   const handleClick = e =>{
     e.preventDefault()
@@ -46,32 +47,48 @@ const HomePage = () => {
       
   }
 
+  const [width, setWidth] = useState(0)
+
+  const carousel = useRef()
+
+  useEffect(() => {
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 500)
+  }, [])
+
   
    
   return (
     <div>
       <button type="button" onClick={createNewHotel}>Create New Hotel</button>
       <button type="button" onClick={createNewRoom}>Create New Room</button>
+
       {msg && <p>{msg}</p>}
-      <h1>Hotels</h1>
+
+      <p className="heading_text">...you wanna book a hotel</p>
+<div className="main_card_container">
+    <motion.div ref={carousel} className="container-carousel">  
+  
+      <motion.div drag="x" dragConstraints={{right: 0, left: -width}} className="inner-carousel">
       {hotels.map((hotel) => {
         
         const base64String = btoa(String.fromCharCode(...hotel.photos.image.data.data))
         return ( 
-        <div key={hotel._id}>
-          <h1>{hotel.name}</h1>
-          <p>Facilities: {hotel.desc}</p>
-          <p>City: {hotel.city}</p> 
-          
-          
-         <img src={`data:images/jpeg;base64,${base64String}`} alt={`${hotel.name}`} />
-          
-          
-      
-          <button id={hotel._id} onClick={handleClick}>View and Book</button>          
-          <button id={hotel._id} onClick={handleDelete}>Delete</button>          
+        <motion.div  key={hotel._id} className="card" >          
+          <h3 className="hotel_name">{hotel.name}</h3>
+          <motion.div className="img_container" whileTap={{scale: 1.1}}>
+             <img src={`data:images/jpeg;base64,${base64String}`} alt={`${hotel.name}`} />
+          </motion.div>
+          <h4 className="city_name">{hotel.city}</h4> 
+          <p className="desc">Facilities: {hotel.desc}</p>
+           <div className="btn_container">       
+             <button type="button" className="view_button" id={hotel._id} onClick={handleClick} style={{backgroundColor: 'unset'}}>View and Book</button>          
+             <button type="button" className="view_button" id={hotel._id} onClick={handleDelete} style={{backgroundColor: 'unset' }}>Delete</button>          
           </div>
+        </motion.div>
 )})}
+</motion.div>
+    </motion.div>
+    </div>
     </div>
   )
 }
