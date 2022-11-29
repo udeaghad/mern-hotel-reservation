@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {useSelector, useDispatch} from "react-redux";
 import getUser from "../redux/auths/usersAction";
 import axios from "axios";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 
 const NavBar = () => {
@@ -30,11 +31,14 @@ const NavBar = () => {
     <Navbar bg="primary" expand="lg" variant="dark">
       <Container>
         <Navbar.Brand href="/">BOOooKa.com</Navbar.Brand>
+        <AccountCircle />
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/" >Home</NavLink>
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/reservations">Reservations</NavLink>
+            <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/createhotel">Add Hotel</NavLink>
+            <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/createroom">Add Room</NavLink>
             {!user ?
             <>            
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/SignUp">Sign Up</NavLink>
@@ -42,6 +46,7 @@ const NavBar = () => {
             </>
             :
             <>
+            
             <NavLink className="text-white text-decoration-none text-center py-2 mx-2" to="/" onClick={handleSignOut}>Sign Out</NavLink>
             </>
             } 

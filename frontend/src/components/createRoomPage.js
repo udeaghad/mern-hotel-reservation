@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 const CreateRoom = () => {
+  const navigate = useNavigate();
   const [body, setBody] = useState({
     title: "",
     desc: "",
@@ -61,29 +63,70 @@ const CreateRoom = () => {
     } catch (error) {
       console.error(error.message)
     }
+
+    e.target.reset()
   }
 
   const allHotels = useSelector(state => state.allHotels)
+
+  const handleCancel =() =>{
+    navigate("/")
+ }
   
   return (
     <>
     <h1>Create Room</h1>
     {msg && <p>{msg}</p>}
-    {file.preview && <img src={file.preview} alt="preview" />}
-    <form onSubmit={onSubmit}>
-      <input type="text" placeholder="Enter Room Name" name="title" onChange={handleChange} />
-      <input type="text" placeholder="Max Number per room" name="maxPeople" onChange={handleChange} />
-      <input type="number" placeholder="Enter Room Price" name="price" onChange={handleChange} />
-      <input type="text" placeholder="Enter Room Description" name="desc" onChange={handleChange} />
-      <input type="file" placeholder="Upload Photos" name="photos" onChange={handlePhotos} />
-      <select name="hotelID" onChange={handleSelect}>
+    
+    <form onSubmit={onSubmit}  className="hotel_form">
+    <div className="form-group">
+        <label htmlFor="title" className="name_label">Name of the Room
+          <input type="text"  name="title" placeholder="Enter Room Name" onChange={handleChange} className="name_input form-control"/>
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="maxPeople" className="name_label">Maximum Number of Persons Per Room
+          <input type="text"  name="maxPeople" placeholder="Max Number per room" onChange={handleChange} className="name_input form-control"/>
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="price" className="name_label">Amount
+          <input type="number"  name="price" placeholder="Enter Room Price" onChange={handleChange} className="name_input form-control"/>
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="desc" className="name_label">Facilities
+          <textarea type="text"  name="desc" placeholder="Available Facilities" onChange={handleChange} className="name_input form-control"/>
+        </label>
+      </div>
+      
+      {file.preview && <div className="preview_img"><img src={ file.preview } alt="preview" style={{width: "100%"}}/></div>}
+     
+      <div className="form-group">
+        <label htmlFor="photos" className="name_label">Upload photos
+          <input type="file" placeholder="Upload ohotos" name="photos" onChange={handlePhotos} className="form-control-file" />      
+        </label>
+      </div>
+      
+      <div className="form-group">
+        
+      <select name="hotelID" onChange={handleSelect} style={{marginTop: "1rem"}}>
         <option value="">Select Hotel</option>
         {allHotels.map((hotel) => (         
           <option key={hotel._id} value={hotel._id}>{hotel.name}</option>
           
         ))}
       </select>
-      <button type="submit">Create new room</button>
+     
+      </div>
+      
+      <div className="btn_container">
+        <button className="create_button"type="submit">Create new room</button>
+        <button type="button" onClick={handleCancel} className="btn btn-danger"> Cancel</button>
+      </div>
 
     </form>
     </>

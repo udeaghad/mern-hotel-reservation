@@ -24,13 +24,7 @@ const HomePage = () => {
     navigate("/hotels")
   }
 
-  const createNewHotel = () => {
-    navigate("/createhotel")
-  }
 
-  const createNewRoom = () => {
-    navigate("/createroom")
-  }
 
   
   const handleDelete = async(e) => {
@@ -51,17 +45,18 @@ const HomePage = () => {
 
   const carousel = useRef()
 
-  useEffect(() => {    
-    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 450)
-  }, [])
+  useEffect(() => {
+    if(hotels.length > 0){  
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
+    }
+  }, [hotels])
+  
 
   
    
   return (
     <div>
-      <button type="button" onClick={createNewHotel}>Create New Hotel</button>
-      <button type="button" onClick={createNewRoom}>Create New Room</button>
-
+      
       {msg && <p>{msg}</p>}
 
       <p className="heading_text">...you wanna book a hotel</p>

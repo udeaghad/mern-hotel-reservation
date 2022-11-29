@@ -35,16 +35,42 @@ const SignUpPage = () => {
     }
     
   }
+
+  const handleCancel = ()  => {
+    navigate("/")
+ }
   
 
   return (
     <> 
-    <h1>Sign Up</h1>
-    <form onSubmit={onSubmit}>
-      <input type="text" placeholder="Enter Your Username" name="username" onChange={handleChange} />
-      <input type="email" placeholder="Enter Your Email" name="email" onChange={handleChange} />
-      <input type="password" placeholder="Enter Your Password" name="password" onChange={handleChange} />
-      <button type="submit">Sign Up</button>
+    <h1 style={{textAlign: "center", marginTop: "10%"}}>Sign Up</h1>
+    <form onSubmit={onSubmit} className="sign_in_form">
+
+      <div className="form-group">
+        <label htmlFor="username" className="name_label">Username
+          <input type="text" placeholder="Enter Your Username" name="username" onChange={handleChange} className="form-control"/>
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="email" className="name_label">E mail
+          <input type="email" placeholder="Enter Your Email" name="email" onChange={handleChange} className="form-control" />
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="password" className="name_label">Password
+           <input type="password" placeholder="Enter Your Password" name="password" onChange={handleChange} className="form-control"/>
+        </label>
+      </div>
+      
+      <div className="btn_container">
+        <button className="create_button"type="submit">Sign Up</button>
+        <button type="button" onClick={handleCancel} className="btn btn-danger"> Cancel</button>
+      </div>
+      
+      
+      
     </form>
     </>
   )

@@ -44,6 +44,8 @@
 
 .heading_text {
   font-family: 'Pacifico', cursive;
+  margin-left: 5%;
+    font-size: 24px;
 }
 
 .img_container {
@@ -127,7 +129,8 @@
   
 }
 
-.hotel_form {
+.hotel_form,
+.sign_in_form {
   margin: 0 7%;
     display: flex;
     flex-direction: column;
@@ -135,6 +138,7 @@
 
 .name_label {
   width: 100%;
+  
 }
 
 .create_button {
@@ -156,4 +160,44 @@
 .create_button:hover {
   background-color: #6a210d;
   color: white;
+}
+
+.room_details {
+  display: flex;
+    flex-direction: column;
+}
+
+.room_details span {
+  font-size: small;
+}
+
+/* .reserve_container {
+  border-top: 2px solid #943d24;
+} */
+
+.hotel_details_container {
+  display: flex;
+    gap: 10px;
+    margin: 5%;
+    border-bottom: 2px solid #943d24;
+    
+}
+
+.hotel_img_container {
+  width: 50%;
+}
+
+.hotel_info_container {
+  width: 50%;
+}
+
+.hotel_info_container p {
+  font-size: small;
+  color: #6a210d;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.form-group {
+  margin: 3% 0;
 }

@@ -70,11 +70,8 @@ if(hotel && hotel.rooms.length > 0){
           <span className="hotel_details">Cheapest Price: ${hotel.cheapest_price}</span>
           <span className="hotel_details">facitlites: {hotel.desc}</span>
           <span className="hotel_details">Ratings: {hotel.rating}</span>
-       </div>
-      
-      
-      
-      <h2>Rooms</h2>
+       </div> 
+       
       <div className="main_card_container">
         <motion.div ref={roomCarousel} className="container-carousel">  
         <motion.div drag="x" dragConstraints={{right: 0, left: -width}} className="inner-carousel">

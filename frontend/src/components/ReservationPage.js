@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useSelector} from "react-redux";
-import axios from "axios"
+import axios from "axios";
+import moment from "moment"
 
 
 
@@ -33,28 +34,45 @@ const ReservationPage = () => {
  
   return(
     <>
-    <h1>Reservation Page</h1>
-       {reservations.map((reservation) => { 
+    
+       {reservations && reservations.map((reservation) => { 
       console.log(reservation)
       const room64String = btoa(String.fromCharCode(...reservation.room.photos.data.data))
       const hotel64String = btoa(String.fromCharCode(...reservation.hotel.photos.image.data.data))
-
+     
      return ( 
-      <div key={reservation._id}>
-        <h1>Hotel</h1>
-        <p>{reservation.date}</p>
-        <img src={`data:image/png;base64,${hotel64String}`} alt={reservation.hotel.name} />
-        <p>{reservation.hotel.name}</p>
-        <p>{reservation.hotel.address}</p>
-        <p>{reservation.hotel.city}</p>
-        <h1>Room Booked</h1>
-        <p>{reservation.room.title}</p>
-        <p>{reservation.date}</p>
-        <p>Person: {reservation.room.maxPeople}</p>
-        <p>{reservation.room.price}</p>
-        <img src={`data:image/png;base64,${room64String}`} alt={reservation.room.title} />
-        <p>{reservation.room.desc}</p>
-        <button id={reservation._id} type="button" onClick={handleDelete}>Delete</button>
+      <div key={reservation._id} className="reserve_container">
+        <h3 style={{margin: "5%"}}>Reservation Details</h3>
+        <div className="hotel_details_container">
+          <div className="hotel_info_container">
+            <p>Booked Date: {moment(reservation.date).format("MMM Do YYYY")}</p>          
+            <p>Hotel Name: {reservation.hotel.name}</p>
+            <p>Address: {reservation.hotel.address}, {reservation.hotel.city}</p>
+            <p>Facilities: {reservation.hotel.desc}</p>
+          </div>
+          <div className="hotel_img_container">
+            <img src={`data:image/png;base64,${hotel64String}`} alt={reservation.hotel.name} style={{width: "100%"}}/>
+          </div>
+
+        </div>
+
+        <div className="hotel_details_container">
+
+        <div className="hotel_info_container">        
+           <p>Room Name: {reservation.room.title}</p>           
+           <p>Max per Room: {reservation.room.maxPeople} Persons</p>
+           <p>Amount: ${reservation.room.price}</p>
+            <p>Facilities: {reservation.room.desc}</p>            
+        </div>
+
+        <div className="hotel_img_container">
+          <img src={`data:image/png;base64,${room64String}`} alt={reservation.room.title} style={{width: "100%"}}/>
+        </div>        
+      </div>
+
+      <div className="btn_container" style={{margin: "5%"}}>
+          <button id={reservation._id} type="button" onClick={handleDelete}  className="create_button">Delete</button>
+        </div>
       </div>
     )})}
 
