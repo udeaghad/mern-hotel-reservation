@@ -56,7 +56,7 @@ const BookHotel = () => {
     { room && <div  className= "detail_container" style={{marginTop: "5%"}}> 
   
    
-    <div className="img_container">
+    <div className="img_container img_cont_desk">
       <img src={`data:image/png;base64,${base64String}`} alt={room.title} />
     </div>
 
@@ -67,7 +67,7 @@ const BookHotel = () => {
       <span>Max per room: {room.maxPeople} Persons</span>
   </div>
 
-  <form onSubmit={onSubmit}>
+  <form onSubmit={onSubmit} className="form_cont_desk">
     <div className="form-group"> 
       <label htmlFor="date" className="date_label">Choose Date
       <input type="date" name="date" placeholder="Choose date" onChange={(e) => setBookDate(e.target.value)}/>

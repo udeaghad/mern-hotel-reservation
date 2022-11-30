@@ -52,13 +52,13 @@ const SignInPage = ()=> {
     <form onSubmit={onSubmit} className="sign_in_form">
       <div className="form-group">
         <label htmlFor="username" className="name_label">Username: 
-          <input type="text" name="username" placeholder="Enter your username" onChange={(e) => handleChange(e)} className="form-control"/>
+          <input type="text" name="username" placeholder="Enter your username" onChange={handleChange} className="form-control"/>
         </label>        
       </div>
 
       <div className="form-group">
-        <label htmlFor="password" className="name_label">Password: 
-          <input type="password" name="password" placeholder="Enter your password" onChange={(e) => handleChange(e)} classname="form-control"/>
+        <label htmlFor="password" className="name_label">Password
+           <input type="password" placeholder="Enter Your Password" name="password" onChange={handleChange} className="form-control"/>
         </label>
       </div>
       

@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {useSelector, useDispatch} from "react-redux";
 import getUser from "../redux/auths/usersAction";
 import axios from "axios";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+
 
 
 const NavBar = () => {
@@ -28,10 +28,10 @@ const NavBar = () => {
   }
   
   return (
-    <Navbar bg="primary" expand="lg" variant="dark">
+    <Navbar expand="lg" variant="dark" style={{backgroundColor: "#943d24"}}>
       <Container>
         <Navbar.Brand href="/">BOOooKa.com</Navbar.Brand>
-        <AccountCircle />
+       
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

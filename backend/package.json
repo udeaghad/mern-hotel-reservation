@@ -5,7 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    
     "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "cd frontend && npm start",
+    "backend": "nodemon index.js",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
     "start": "nodemon index.js"
   },
   "keywords": [],
